@@ -13,4 +13,10 @@
     <PackageReference Include="swed32" Version="1.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="ezOverLay">
+      <HintPath>..\..\..\Downloads\ezOverLay.dll\ezOverLay\bin\Debug\ezOverLay.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

@@ -1,3 +1,4 @@
+using ezOverLay;
 using System.Runtime.InteropServices;
 using System.Threading;
 
@@ -5,7 +6,7 @@ namespace ACCOOLMENU
 {
     public partial class Form1 : Form
     {
-
+        ez ez = new ez();
         methods? m;
         Entity localPlayer = new Entity();
         List<Entity> entities = new List<Entity>();
@@ -24,10 +25,13 @@ namespace ACCOOLMENU
             m = new methods();
             if (m != null)
             {
+                ez.SetInvi(this);
+                ez.DoStuff("AssaultCube", this);
+
                 Thread thread = new Thread(Main) { IsBackground = true };
                 thread.Start();
             }
-   
+
         }
 
         void Main()
@@ -43,7 +47,7 @@ namespace ACCOOLMENU
                 {
                     if (entities.Count > 0)
                     {
-                        
+
                         foreach (var ent in entities)
                         {
                             // 아군 팀이 아니여야함
@@ -57,8 +61,39 @@ namespace ACCOOLMENU
                     }
                 }
 
-                 
+                Form1 f = this;
+                f.Refresh();
+
                 Thread.Sleep(20);
+            }
+        }
+
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            Pen red = new Pen(Color.Red, 3);
+            Pen green = new Pen(Color.Green, 3);
+
+            foreach (var ent in entities.ToList())
+            {
+                var wtsFeet = m.WordToScreen(m.ReadMatrix(), ent.feet, this.Width, this.Height);
+                var wtsHead= m.WordToScreen(m.ReadMatrix(), ent.head, this.Width, this.Height);
+
+
+                if (wtsFeet.X > 0 )
+                {
+                    if (localPlayer.team == ent.team)
+                    {
+
+                        g.DrawLine(green, new Point(Width / 2, Height), wtsFeet);
+                        g.DrawRectangle(green, m.CalcReact(wtsFeet, wtsHead));
+                    }
+                    else
+                    {
+                        g.DrawRectangle(red, m.CalcReact(wtsFeet, wtsHead));
+                        g.DrawLine(red, new Point(Width / 2, Height), wtsFeet);
+                    }
+                }
             }
         }
     }
