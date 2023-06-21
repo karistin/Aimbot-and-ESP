@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ACCOOLMENU
 {
+    // playerObject 저장 객체
     public class Entity
     {
         public IntPtr baseAddress;
@@ -17,6 +18,7 @@ namespace ACCOOLMENU
         public int health, team, currentAmmo, dead;
         public string name;
     }
+    // ViewMatrix
 
     public class viewMatrix
     {

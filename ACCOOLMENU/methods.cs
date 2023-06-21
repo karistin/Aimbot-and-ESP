@@ -126,11 +126,11 @@ namespace ACCOOLMENU
         public Rectangle CalcReact(Point feet, Point head)
         {
             var rect = new Rectangle();
-            rect.X = head.X - (feet.Y - head.Y) / 4;
+            rect.X = head.X - 100;
             rect.Y = head.Y;
 
-            rect.Width = (feet.Y - head.Y) / 2;
-            rect.Height = feet.Y - head.Y; 
+            rect.Width = (100);
+            rect.Height = (head.Y - feet.Y); 
 
             return rect;
         }

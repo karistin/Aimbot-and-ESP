@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ACCOOLMENU
 {
+    // 게임내의 데이터 오프셋 
     public class Offsets
     {
         public static int

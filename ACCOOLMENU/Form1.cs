@@ -86,12 +86,13 @@ namespace ACCOOLMENU
                     {
 
                         g.DrawLine(green, new Point(Width / 2, Height), wtsFeet);
-                        g.DrawRectangle(green, m.CalcReact(wtsFeet, wtsHead));
+                        //g.DrawRectangle(green, m.CalcReact(wtsFeet, wtsHead));
                     }
                     else
                     {
-                        g.DrawRectangle(red, m.CalcReact(wtsFeet, wtsHead));
+                        
                         g.DrawLine(red, new Point(Width / 2, Height), wtsFeet);
+                        //g.DrawRectangle(red, m.CalcReact(wtsFeet, wtsHead));
                     }
                 }
             }
