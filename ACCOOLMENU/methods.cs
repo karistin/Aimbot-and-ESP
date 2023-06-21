@@ -11,7 +11,10 @@ namespace ACCOOLMENU
     public class methods
     {
         public Swed mem;
+         
         public IntPtr moudleBase;
+
+        // local Player 초기화
         public Entity ReadLocalPlayer()
         {
             var localPlayer = ReadEntity(mem.ReadPointer(moudleBase, Offsets.iLocalPlayer));
@@ -21,6 +24,8 @@ namespace ACCOOLMENU
             return localPlayer;
         }
 
+
+        // 데이터 읽기 
         public Entity ReadEntity(IntPtr entBase)
         {
             var ent = new Entity();
@@ -38,6 +43,8 @@ namespace ACCOOLMENU
             return ent;
         }
 
+
+        // EntityList를 읽고 4명까지 해당 정보를 저장 
         public List<Entity> ReadEntites(Entity localPlayer)
         {
             var entities = new List<Entity>();
@@ -47,6 +54,7 @@ namespace ACCOOLMENU
             {
                 var currentEntBase = mem.ReadPointer(entityList, i * 0x4);
                 var ent = ReadEntity(currentEntBase);
+          
                 ent.mag = CalcMag(localPlayer, ent);
 
                 // health ? 0
@@ -74,18 +82,22 @@ namespace ACCOOLMENU
             return new Vector2(x, y);
         }
 
+        // x, y로 해당 Entity 에임 고정 
         public void Aim(Entity ent, float x, float y)
         {
             mem.WriteFloat(ent.baseAddress, Offsets.vAngles, x);
             mem.WriteFloat(ent.baseAddress, Offsets.vAngles + 0x4, y);
         }
 
+        // 2차원 길이 계산 
         public static float CalcDist(Entity localPlayer, Entity destEnt)
         {
             return (float)
                 Math.Sqrt(Math.Pow(destEnt.feet.X - localPlayer.feet.X, 2)
                 + Math.Pow(destEnt.feet.Y - localPlayer.feet.Y, 2));
         }
+        
+        // 3차원 길이 계산 
         public static float CalcMag(Entity localPlayer, Entity destEnt)
         {
             return (float)
@@ -94,6 +106,7 @@ namespace ACCOOLMENU
                 + Math.Pow(destEnt.feet.Z - localPlayer.feet.Z, 2));
         }
 
+        ///스크린 계산 
         public Point WordToScreen(viewMatrix mtx, Vector3 pos, int width, int height)
         {
             var twoD = new Point();
@@ -123,6 +136,8 @@ namespace ACCOOLMENU
                 return new Point(-99, -99);
             }
         }
+        
+        // 그릴 직사각형 설계 
         public Rectangle CalcReact(Point feet, Point head)
         {
             var rect = new Rectangle();
@@ -134,6 +149,8 @@ namespace ACCOOLMENU
 
             return rect;
         }
+        
+        // 메트릭스 정보를 읽고 계산
         public viewMatrix ReadMatrix()
         {
             var viewMatrix = new viewMatrix();
@@ -161,6 +178,8 @@ namespace ACCOOLMENU
 
             return viewMatrix;
         }   
+        
+        // 모듈 베이스 접근 
         public methods()
         {
             mem = new Swed("ac_client");
