@@ -25,7 +25,8 @@ AssaultCube 에임봇과 ESP 프로그램
 
 1. AsscultCube(ac_client.exe)를 실행해 주세요
 2. 프로그램을 실행해 주세요(작동이 않되는 경우 관리자 권한으로 해주세요)
-3. AsscultCube에 오버레이 된다면 정상 작동 중입니다. 
+3. AsscultCube에 오버레이 된다면 정상 작동 중입니다.
+4. 만약 실행이 않되면 **스스로 빌드하기** 를 참고 해주세요 
 
 ## GIF 
 
